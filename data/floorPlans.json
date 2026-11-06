@@ -1,0 +1,13 @@
+[
+  {
+    "buildingId": "BLDG-B",
+    "floor": 1,
+    "image": "/floorplans/bldg-b-floor-1.svg"
+  },
+  {
+    "buildingId": "BLDG-B",
+    "floor": 2,
+    "image": "/floorplans/bldg-b-floor-2.svg"
+  }
+]
+

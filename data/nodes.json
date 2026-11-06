@@ -1,0 +1,120 @@
+[
+  {
+    "nodeId": "NODE-B-F1-ENTRANCE",
+    "buildingId": "BLDG-B",
+    "floor": 1,
+    "x": 100,
+    "y": 250,
+    "type": "entrance",
+    "label": "Building B Main Entrance"
+  },
+  {
+    "nodeId": "NODE-B-F1-HALL-1",
+    "buildingId": "BLDG-B",
+    "floor": 1,
+    "x": 250,
+    "y": 250,
+    "type": "hallway_corner",
+    "label": "Floor 1 Main Hallway Junction"
+  },
+  {
+    "nodeId": "NODE-B-101",
+    "buildingId": "BLDG-B",
+    "floor": 1,
+    "x": 180,
+    "y": 150,
+    "type": "room",
+    "label": "Room B-101 Doorway"
+  },
+  {
+    "nodeId": "NODE-B-102",
+    "buildingId": "BLDG-B",
+    "floor": 1,
+    "x": 350,
+    "y": 150,
+    "type": "room",
+    "label": "Room B-102 Doorway"
+  },
+  {
+    "nodeId": "NODE-B-F1-HALL-2",
+    "buildingId": "BLDG-B",
+    "floor": 1,
+    "x": 500,
+    "y": 250,
+    "type": "hallway_corner",
+    "label": "Floor 1 East Hallway End"
+  },
+  {
+    "nodeId": "NODE-B-103",
+    "buildingId": "BLDG-B",
+    "floor": 1,
+    "x": 500,
+    "y": 150,
+    "type": "room",
+    "label": "Room B-103 Doorway"
+  },
+  {
+    "nodeId": "NODE-B-F1-STAIRS",
+    "buildingId": "BLDG-B",
+    "floor": 1,
+    "x": 560,
+    "y": 250,
+    "type": "stairs",
+    "label": "Floor 1 East Stairs Landing"
+  },
+  {
+    "nodeId": "NODE-B-F2-STAIRS",
+    "buildingId": "BLDG-B",
+    "floor": 2,
+    "x": 560,
+    "y": 250,
+    "type": "stairs",
+    "label": "Floor 2 East Stairs Landing"
+  },
+  {
+    "nodeId": "NODE-B-F2-HALL-2",
+    "buildingId": "BLDG-B",
+    "floor": 2,
+    "x": 500,
+    "y": 250,
+    "type": "hallway_corner",
+    "label": "Floor 2 East Corridor Junction"
+  },
+  {
+    "nodeId": "NODE-B-201",
+    "buildingId": "BLDG-B",
+    "floor": 2,
+    "x": 500,
+    "y": 150,
+    "type": "room",
+    "label": "Room B-201 Doorway"
+  },
+  {
+    "nodeId": "NODE-B-F2-HALL-1",
+    "buildingId": "BLDG-B",
+    "floor": 2,
+    "x": 250,
+    "y": 250,
+    "type": "hallway_corner",
+    "label": "Floor 2 West Corridor Junction"
+  },
+  {
+    "nodeId": "NODE-B-202",
+    "buildingId": "BLDG-B",
+    "floor": 2,
+    "x": 350,
+    "y": 150,
+    "type": "room",
+    "label": "Room B-202 Doorway"
+  },
+  {
+    "nodeId": "NODE-B-203",
+    "buildingId": "BLDG-B",
+    "floor": 2,
+    "x": 180,
+    "y": 150,
+    "type": "room",
+    "label": "Room B-203 Doorway"
+  }
+]
+
