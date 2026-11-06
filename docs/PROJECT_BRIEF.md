@@ -39,3 +39,4 @@ To ensure delivery of a robust pilot, the following features are strictly **out 
 - **No BLE Beacons or Wi-Fi Fingerprinting**: No complex or costly hardware positioning infrastructure.
 - **No User Accounts or Authentication**: No login screens, passwords, or personal profiles.
 - **No Admin or Professor Portals**: Data is managed via structured local JSON files.
+

@@ -7,3 +7,4 @@ All project rules, architectural decisions, out-of-scope boundaries, tech stack 
 - [`docs/`](docs/)
 
 Always follow the 11 WORKING RULES in `AGENTS.md` without exception.
+
