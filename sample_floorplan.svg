@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%" style="background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Shadow filter for pins and cards -->
+    <filter id="drop-shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity="0.15" />
+    </filter>
+  </defs>
+
+  <!-- Title & Subtitle -->
+  <text x="30" y="40" font-size="20" font-weight="bold" fill="#0f172a">Room Finder: 2D Floor Plan Example</text>
+  <text x="30" y="62" font-size="13" fill="#64748b">Building B - Floor 1 | Active Route: Entrance → Room B-102</text>
+
+  <!-- Outer Building Boundary -->
+  <rect x="50" y="80" width="700" height="340" rx="8" fill="#ffffff" stroke="#94a3b8" stroke-width="3" />
+
+  <!-- Corridors (Light Gray Background) -->
+  <path d="M 70 230 L 730 230 L 730 330 L 70 330 Z" fill="#f1f5f9" />
+  <path d="M 70 330 L 220 330 L 220 400 L 70 400 Z" fill="#f1f5f9" />
+
+  <!-- ROOMS ON TOP (Floor 1) -->
+  <!-- Room B-101 -->
+  <rect x="70" y="100" width="180" height="130" rx="4" fill="#ffffff" stroke="#334155" stroke-width="2" />
+  <text x="160" y="165" font-size="16" font-weight="bold" fill="#1e293b" text-anchor="middle">Room B-101</text>
+  <text x="160" y="185" font-size="11" fill="#64748b" text-anchor="middle">CS101-A (Turing)</text>
+  <!-- Doorway B-101 -->
+  <line x1="140" y1="230" x2="180" y2="230" stroke="#f1f5f9" stroke-width="3" />
+  <line x1="140" y1="230" x2="160" y2="215" stroke="#94a3b8" stroke-width="2" stroke-dasharray="2,2" />
+
+  <!-- Room B-102 (Destination Highlighted) -->
+  <rect x="270" y="100" width="190" height="130" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5" />
+  <text x="365" y="165" font-size="16" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Room B-102 ★</text>
+  <text x="365" y="185" font-size="11" fill="#3b82f6" text-anchor="middle">MATH102-B (Lovelace)</text>
+  <!-- Doorway B-102 -->
+  <line x1="345" y1="230" x2="385" y2="230" stroke="#f1f5f9" stroke-width="3" />
+  <line x1="345" y1="230" x2="365" y2="215" stroke="#2563eb" stroke-width="2" stroke-dasharray="2,2" />
+
+  <!-- Room B-103 -->
+  <rect x="480" y="100" width="160" height="130" rx="4" fill="#ffffff" stroke="#334155" stroke-width="2" />
+  <text x="560" y="165" font-size="16" font-weight="bold" fill="#1e293b" text-anchor="middle">Room B-103</text>
+  <text x="560" y="185" font-size="11" fill="#64748b" text-anchor="middle">PHYS201-A (Feynman)</text>
+  <!-- Doorway B-103 -->
+  <line x1="540" y1="230" x2="580" y2="230" stroke="#f1f5f9" stroke-width="3" />
+
+  <!-- East Staircase (Up to Floor 2) -->
+  <rect x="660" y="100" width="70" height="230" rx="4" fill="#e2e8f0" stroke="#475569" stroke-width="2" />
+  <!-- Stair Step Lines -->
+  <line x1="660" y1="130" x2="730" y2="130" stroke="#94a3b8" stroke-width="1.5" />
+  <line x1="660" y1="160" x2="730" y2="160" stroke="#94a3b8" stroke-width="1.5" />
+  <line x1="660" y1="190" x2="730" y2="190" stroke="#94a3b8" stroke-width="1.5" />
+  <line x1="660" y1="220" x2="730" y2="220" stroke="#94a3b8" stroke-width="1.5" />
+  <line x1="660" y1="250" x2="730" y2="250" stroke="#94a3b8" stroke-width="1.5" />
+  <text x="695" y="280" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">STAIRS</text>
+  <text x="695" y="295" font-size="9" fill="#64748b" text-anchor="middle">To Floor 2</text>
+
+  <!-- Restrooms / Facilities -->
+  <rect x="270" y="330" width="190" height="70" rx="4" fill="#ffffff" stroke="#64748b" stroke-width="1.5" />
+  <text x="365" y="370" font-size="13" fill="#64748b" text-anchor="middle">Restrooms</text>
+
+  <!-- Main Entrance -->
+  <rect x="110" y="400" width="80" height="20" fill="#22c55e" rx="2" />
+  <text x="150" y="415" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">ENTRANCE</text>
+
+  <!-- NAVIGATION ROUTE LINE (Static Highlighted Line) -->
+  <!-- Segment 1: From Entrance up into main hallway -->
+  <!-- Segment 2: Turn right along corridor -->
+  <!-- Segment 3: Turn up to Room B-102 door -->
+  <path d="M 150 390 L 150 280 L 365 280 L 365 235" 
+        fill="none" 
+        stroke="#2563eb" 
+        stroke-width="6" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" />
+
+  <!-- Route Waypoint Dots (Dijkstra Nodes) -->
+  <circle cx="150" cy="280" r="4" fill="#1d4ed8" />
+
+  <!-- START PIN: "You Are Here" (Green) -->
+  <g transform="translate(150, 390)" filter="url(#drop-shadow)">
+    <circle cx="0" cy="0" r="14" fill="#16a34a" />
+    <circle cx="0" cy="0" r="6" fill="#ffffff" />
+    <rect x="-65" y="-42" width="130" height="24" rx="4" fill="#15803d" />
+    <text x="0" y="-26" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">📍 You Are Here (QR)</text>
+  </g>
+
+  <!-- DESTINATION PIN: Room B-102 (Red) -->
+  <g transform="translate(365, 220)" filter="url(#drop-shadow)">
+    <circle cx="0" cy="0" r="14" fill="#dc2626" />
+    <circle cx="0" cy="0" r="6" fill="#ffffff" />
+    <rect x="-65" y="-42" width="130" height="24" rx="4" fill="#b91c1c" />
+    <text x="0" y="-26" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">🎯 Room B-102</text>
+  </g>
+
+  <!-- Legend Box (Bottom Right) -->
+  <g transform="translate(500, 350)">
+    <rect x="0" y="0" width="230" height="60" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+    <!-- Legend items -->
+    <circle cx="18" cy="18" r="6" fill="#16a34a" />
+    <text x="32" y="22" font-size="10" fill="#334155">Start Node (QR Scan)</text>
+
+    <line x1="12" y1="36" x2="24" y2="36" stroke="#2563eb" stroke-width="4" stroke-linecap="round" />
+    <text x="32" y="40" font-size="10" fill="#334155">Static Route Path</text>
+
+    <circle cx="130" cy="18" r="6" fill="#dc2626" />
+    <text x="144" y="22" font-size="10" fill="#334155">Target Room</text>
+
+    <rect x="124" y="32" width="12" height="10" fill="#e2e8f0" stroke="#475569" stroke-width="1" />
+    <text x="144" y="40" font-size="10" fill="#334155">Stairs</text>
+  </g>
+
+</svg>
+
