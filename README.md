@@ -1,4 +1,4 @@
-asdss# Room Finder
+# Room Finder
 
 Room Finder is a lightweight, mobile-first web app made by students for students—especially first-year students who get lost or forget which classroom they need to go to.
 
