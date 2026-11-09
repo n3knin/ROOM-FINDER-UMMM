@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UM Room Finder - Mobile App Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* UM Brand Colors */
+      --um-red-primary: #990000;
+      --um-red-dark: #7A0000;
+      --um-red-light: #FFF1F2;
+      --um-gold-primary: #E5A800;
+      --um-gold-dark: #C68A00;
+      --um-gold-light: #FEF9C3;
+      
+      /* Light Mode Palette */
+      --bg-page: #F1F5F9;
+      --bg-surface: #FFFFFF;
+      --bg-subtle: #F8FAFC;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --text-light: #94A3B8;
+      --border-color: #E2E8F0;
+      --border-focus: #990000;
+      
+      /* Status Badge Colors */
+      --badge-ongoing-bg: #DCFCE7;
+      --badge-ongoing-text: #166534;
+      --badge-soon-bg: #FEF3C7;
+      --badge-soon-text: #92400E;
+      --badge-finished-bg: #F1F5F9;
+      --badge-finished-text: #475569;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 24px 12px;
+    }
+
+    /* Screen Selector Pill Bar (Outside Phone) */
+    .preview-controls {
+      display: flex;
+      background: #FFFFFF;
+      padding: 6px;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      margin-bottom: 20px;
+      gap: 6px;
+    }
+
+    .preview-btn {
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .preview-btn.active {
+      background: var(--um-red-primary);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(153, 0, 0, 0.25);
+    }
+
+    /* Realistic Mobile Frame */
+    .phone-container {
+      width: 100%;
+      max-width: 412px;
+      height: 844px;
+      background: var(--bg-surface);
+      border-radius: 44px;
+      box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.2), 0 0 0 10px #0F172A, 0 0 0 12px #334155;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Phone Status Bar */
+    .status-bar {
+      height: 44px;
+      background: var(--um-red-primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 24px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #FFFFFF;
+      flex-shrink: 0;
+    }
+
+    /* App Header */
+    .app-header {
+      background: var(--um-red-primary);
+      padding: 12px 20px 20px 20px;
+      color: #FFFFFF;
+      flex-shrink: 0;
+      border-bottom: 3px solid var(--um-gold-primary);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-badge {
+      background: var(--um-gold-primary);
+      color: #0F172A;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .offline-pill {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.18);
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .offline-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22C55E;
+    }
+
+    .sub-brand {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 500;
+    }
+
+    /* Screen Views Container */
+    .screen-content {
+      flex: 1;
+      overflow-y: auto;
+      background: var(--bg-subtle);
+      position: relative;
+    }
+
+    .screen-view {
+      display: none;
+      padding: 18px;
+    }
+
+    .screen-view.active {
+      display: block;
+    }
+
+    /* SEARCH BAR */
+    .search-wrapper {
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 14px 16px 14px 44px;
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-color);
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-main);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--um-red-primary);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--text-light);
+    }
+
+    /* BIG SCAN BUTTON */
+    .btn-scan {
+      width: 100%;
+      background: linear-gradient(135deg, var(--um-red-primary) 0%, var(--um-red-dark) 100%);
+      color: #FFFFFF;
+      border: none;
+      padding: 16px 20px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(153, 0, 0, 0.25);
+      margin-bottom: 24px;
+      transition: transform 0.15s ease;
+    }
+
+    .btn-scan:active {
+      transform: scale(0.98);
+    }
+
+    .btn-scan-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+    }
+
+    .qr-badge-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .btn-scan-title {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .btn-scan-desc {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 500;
+    }
+
+    .btn-scan-arrow {
+      background: var(--um-gold-primary);
+      color: #0F172A;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    /* SECTION HEADER */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-main);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .section-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--um-red-primary);
+      background: var(--um-red-light);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    /* CLASS & ROOM CARDS */
+    .class-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .class-card:hover {
+      border-color: var(--um-gold-primary);
+      box-shadow: 0 4px 12px rgba(229, 168, 0, 0.15);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .room-tag {
+      background: var(--um-red-light);
+      color: var(--um-red-primary);
+      font-weight: 800;
+      font-size: 14px;
+      padding: 4px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(153, 0, 0, 0.1);
+    }
+
+    .status-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 6px;
+    }
+
+    .status-badge.ongoing {
+      background: var(--badge-ongoing-bg);
+      color: var(--badge-ongoing-text);
+    }
+
+    .status-badge.soon {
+      background: var(--badge-soon-bg);
+      color: var(--badge-soon-text);
+    }
+
+    .class-subject {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .class-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .class-meta span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* NAVIGATION SCREEN SPECIFIC */
+    .nav-banner {
+      background: #FFFFFF;
+      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-location-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .nav-location-val {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--um-red-primary);
+    }
+
+    /* FLOOR SWITCHER TABS */
+    .floor-tabs {
+      display: flex;
+      background: #E2E8F0;
+      padding: 4px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      gap: 4px;
+    }
+
+    .floor-tab {
+      flex: 1;
+      padding: 8px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      transition: all 0.2s;
+    }
+
+    .floor-tab.active {
+      background: #FFFFFF;
+      color: var(--um-red-primary);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    /* MAP CONTAINER */
+    .map-box {
+      background: #FFFFFF;
+      border-radius: 18px;
+      border: 1.5px solid var(--border-color);
+      padding: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      margin-bottom: 14px;
+    }
+
+    /* STEP-BY-STEP DIRECTIONS */
+    .directions-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 12px;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      border-bottom: 1px dashed var(--border-color);
+    }
+
+    .step-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--um-red-light);
+      color: var(--um-red-primary);
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    .step-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    /* INTERACTIVE STAIRS FLIP BANNER */
+    .stair-flip-banner {
+      background: linear-gradient(135deg, var(--um-gold-light) 0%, #FEF08A 100%);
+      border: 1.5px solid var(--um-gold-primary);
+      padding: 12px 14px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .stair-flip-btn {
+      background: var(--um-red-primary);
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    /* BOTTOM NAV BAR */
+    .bottom-nav {
+      height: 64px;
+      background: #FFFFFF;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-shrink: 0;
+      padding: 0 10px;
+    }
+
+    .nav-tab-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      border: none;
+      background: transparent;
+      color: var(--text-light);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 65px;
+    }
+
+    .nav-tab-btn.active {
+      color: var(--um-red-primary);
+      font-weight: 700;
+    }
+
+    .nav-icon {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen Selector Controls -->
+  <div class="preview-controls">
+    <button class="preview-btn active" onclick="switchView('home', this)">🏠 Home Screen</button>
+    <button class="preview-btn" onclick="switchView('nav', this)">🗺️ Navigation Screen</button>
+    <button class="preview-btn" onclick="switchView('room', this)">🏫 Room Details</button>
+  </div>
+
+  <!-- Mobile Phone Frame -->
+  <div class="phone-container">
+    
+    <!-- Phone Status Bar -->
+    <div class="status-bar">
+      <span>9:41</span>
+      <span>📶 5G &nbsp; 100% 🔋</span>
+    </div>
+
+    <!-- App Header (UM Theme) -->
+    <div class="app-header">
+      <div class="header-top">
+        <div class="brand-title">
+          <span>🏛️ UM Finder</span>
+          <span class="brand-badge">PILOT</span>
+        </div>
+        <div class="offline-pill">
+          <span class="offline-dot"></span>
+          <span>Offline Ready</span>
+        </div>
+      </div>
+      <div class="sub-brand">The University of Mindanao • Building B</div>
+    </div>
+
+    <!-- Scrollable Screen Content -->
+    <div class="screen-content">
+
+      <!-- ================= 1. HOME SCREEN ================= -->
+      <div id="view-home" class="screen-view active">
+        
+        <!-- Search Bar -->
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" placeholder="Search room (B-201), subject, or prof...">
+        </div>
+
+        <!-- Big Scan QR Button -->
+        <button class="btn-scan" onclick="switchView('nav', document.querySelectorAll('.preview-btn')[1])">
+          <div class="btn-scan-left">
+            <div class="qr-badge-icon">📷</div>
+            <div>
+              <div class="btn-scan-title">Scan Hallway QR</div>
+              <div class="btn-scan-desc">Find closest checkpoint sticker</div>
+            </div>
+          </div>
+          <div class="btn-scan-arrow">➔</div>
+        </button>
+
+        <!-- Section: Today's Classes -->
+        <div class="section-header">
+          <span class="section-title">Today's Schedule</span>
+          <span class="section-badge">Monday</span>
+        </div>
+
+        <!-- Class Card 1 -->
+        <div class="class-card" onclick="switchView('room', document.querySelectorAll('.preview-btn')[2])">
+          <div class="card-top">
+            <span class="room-tag">Room B-101</span>
+            <span class="status-badge ongoing">● Ongoing</span>
+          </div>
+          <div class="class-subject">Introduction to Computing</div>
+          <div class="class-meta">
+            <span>⏰ 8:30 AM - 10:00 AM</span>
+            <span>•</span>
+            <span>👤 Dr. Turing</span>
+          </div>
+        </div>
+
+        <!-- Class Card 2 -->
+        <div class="class-card" onclick="switchView('nav', document.querySelectorAll('.preview-btn')[1])">
+          <div class="card-top">
+            <span class="room-tag">Room B-201</span>
+            <span class="status-badge soon">Starts in 25m</span>
+          </div>
+          <div class="class-subject">Data Structures & Algorithms</div>
+          <div class="class-meta">
+            <span>⏰ 10:15 AM - 11:45 AM</span>
+            <span>•</span>
+            <span>👤 Prof. Knuth</span>
+          </div>
+        </div>
+
+        <!-- Class Card 3 -->
+        <div class="class-card">
+          <div class="card-top">
+            <span class="room-tag">Room B-202</span>
+            <span class="status-badge" style="background:#F1F5F9; color:#64748B;">Upcoming</span>
+          </div>
+          <div class="class-subject">Calculus for Engineers</div>
+          <div class="class-meta">
+            <span>⏰ 1:00 PM - 2:30 PM</span>
+            <span>•</span>
+            <span>👤 Dr. Lovelace</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= 2. NAVIGATION SCREEN ================= -->
+      <div id="view-nav" class="screen-view">
+        
+        <!-- Current Checkpoint Banner -->
+        <div class="nav-banner">
+          <div>
+            <div class="nav-location-title">📍 Your Location</div>
+            <div class="nav-location-val">Building B • Main Entrance</div>
+          </div>
+          <button style="background:var(--bg-subtle); border:1px solid var(--border-color); padding:6px 10px; border-radius:8px; font-size:11px; font-weight:700; color:var(--um-red-primary);">Rescan</button>
+        </div>
+
+        <!-- Interactive Stairs Transition Alert -->
+        <div class="stair-flip-banner" onclick="toggleFloor(2)">
+          <div>
+            <div style="font-size:12px; font-weight:800; color:#854D0E;">🪜 Room B-201 is on Floor 2</div>
+            <div style="font-size:11px; color:#A16207;">Tap here or on stairs to view 2nd floor map</div>
+          </div>
+          <button class="stair-flip-btn" id="stair-action-btn">View Floor 2 ➔</button>
+        </div>
+
+        <!-- Floor Switcher Tabs -->
+        <div class="floor-tabs">
+          <button class="floor-tab active" id="tab-floor-1" onclick="toggleFloor(1)">Floor 1 (Entrance)</button>
+          <button class="floor-tab" id="tab-floor-2" onclick="toggleFloor(2)">Floor 2 (Target)</button>
+        </div>
+
+        <!-- 2D SVG Map Rendering -->
+        <div class="map-box">
+          <svg id="svg-floor-1" viewBox="0 0 600 360" width="100%" height="auto" style="display:block;">
+            <!-- Outer Wall -->
+            <rect x="20" y="40" width="560" height="280" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2" />
+            <!-- Corridor -->
+            <path d="M 40 180 L 560 180 L 560 260 L 40 260 Z" fill="#F1F5F9" />
+            <path d="M 40 260 L 150 260 L 150 320 L 40 320 Z" fill="#F1F5F9" />
+
+            <!-- Rooms -->
+            <rect x="40" y="60" width="140" height="120" rx="4" fill="#FFFFFF" stroke="#334155" stroke-width="2" />
+            <text x="110" y="125" font-size="14" font-weight="bold" fill="#0F172A" text-anchor="middle">Room 101</text>
+
+            <rect x="200" y="60" width="150" height="120" rx="4" fill="#FFFFFF" stroke="#334155" stroke-width="2" />
+            <text x="275" y="125" font-size="14" font-weight="bold" fill="#0F172A" text-anchor="middle">Room 102</text>
+
+            <rect x="370" y="60" width="130" height="120" rx="4" fill="#FFFFFF" stroke="#334155" stroke-width="2" />
+            <text x="435" y="125" font-size="14" font-weight="bold" fill="#0F172A" text-anchor="middle">Room 103</text>
+
+            <!-- Interactive Clickable Stairs -->
+            <g onclick="toggleFloor(2)" style="cursor:pointer;">
+              <rect x="510" y="60" width="50" height="200" rx="4" fill="#FEF08A" stroke="#E5A800" stroke-width="2" />
+              <line x1="510" y1="90" x2="560" y2="90" stroke="#CA8A04" stroke-width="1.5" />
+              <line x1="510" y1="120" x2="560" y2="120" stroke="#CA8A04" stroke-width="1.5" />
+              <line x1="510" y1="150" x2="560" y2="150" stroke="#CA8A04" stroke-width="1.5" />
+              <line x1="510" y1="180" x2="560" y2="180" stroke="#CA8A04" stroke-width="1.5" />
+              <text x="535" y="225" font-size="11" font-weight="bold" fill="#854D0E" text-anchor="middle">STAIRS</text>
+              <text x="535" y="240" font-size="9" fill="#990000" text-anchor="middle">TAP ME ➔</text>
+            </g>
+
+            <!-- Route Line leading into stairs -->
+            <path d="M 95 310 L 95 220 L 510 220" fill="none" stroke="#990000" stroke-width="6" stroke-linecap="round" />
+
+            <!-- Green Start Pin -->
+            <circle cx="95" cy="310" r="10" fill="#16A34A" />
+            <circle cx="95" cy="310" r="4" fill="#FFFFFF" />
+
+            <!-- Target Stair Pin -->
+            <circle cx="510" cy="220" r="10" fill="#E5A800" />
+            <circle cx="510" cy="220" r="4" fill="#990000" />
+          </svg>
+
+          <!-- SVG Floor 2 (Initially Hidden) -->
+          <svg id="svg-floor-2" viewBox="0 0 600 360" width="100%" height="auto" style="display:none;">
+            <!-- Outer Wall -->
+            <rect x="20" y="40" width="560" height="280" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2" />
+            <path d="M 40 180 L 560 180 L 560 260 L 40 260 Z" fill="#F1F5F9" />
+
+            <!-- Room B-201 Target -->
+            <rect x="40" y="60" width="140" height="120" rx="4" fill="#FFFFFF" stroke="#334155" stroke-width="2" />
+            <text x="110" y="125" font-size="14" font-weight="bold" fill="#0F172A" text-anchor="middle">Room 203</text>
+
+            <rect x="200" y="60" width="150" height="120" rx="4" fill="#FFFFFF" stroke="#334155" stroke-width="2" />
+            <text x="275" y="125" font-size="14" font-weight="bold" fill="#0F172A" text-anchor="middle">Room 202</text>
+
+            <rect x="370" y="60" width="130" height="120" rx="4" fill="#FFF1F2" stroke="#990000" stroke-width="2.5" />
+            <text x="435" y="125" font-size="14" font-weight="bold" fill="#990000" text-anchor="middle">Room 201 ★</text>
+
+            <!-- Stairs from Floor 1 -->
+            <g onclick="toggleFloor(1)" style="cursor:pointer;">
+              <rect x="510" y="60" width="50" height="200" rx="4" fill="#E2E8F0" stroke="#64748B" stroke-width="2" />
+              <line x1="510" y1="90" x2="560" y2="90" stroke="#94A3B8" stroke-width="1.5" />
+              <line x1="510" y1="120" x2="560" y2="120" stroke="#94A3B8" stroke-width="1.5" />
+              <line x1="510" y1="150" x2="560" y2="150" stroke="#94A3B8" stroke-width="1.5" />
+              <text x="535" y="225" font-size="10" font-weight="bold" fill="#475569" text-anchor="middle">STAIRS</text>
+            </g>
+
+            <!-- Route Line continuing from stairs to Room 201 -->
+            <path d="M 510 220 L 435 220 L 435 185" fill="none" stroke="#990000" stroke-width="6" stroke-linecap="round" />
+
+            <!-- Green Start from stairs -->
+            <circle cx="510" cy="220" r="10" fill="#16A34A" />
+            <circle cx="510" cy="220" r="4" fill="#FFFFFF" />
+
+            <!-- Red Destination Pin at Room 201 -->
+            <circle cx="435" cy="180" r="10" fill="#990000" />
+            <circle cx="435" cy="180" r="4" fill="#FFFFFF" />
+          </svg>
+        </div>
+
+        <!-- Directions List -->
+        <div class="directions-card">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div>
+              <div class="step-text">From Main Entrance, walk down the corridor.</div>
+              <div class="step-sub">Walk straight for about 25 meters</div>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num" style="background:var(--um-gold-light); color:#854D0E;">2</div>
+            <div>
+              <div class="step-text">Take the East Stairs up to Floor 2.</div>
+              <div class="step-sub">Tap stairs above when you reach the top</div>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div>
+              <div class="step-text">Room B-201 is the first door on your left.</div>
+              <div class="step-sub">Target classroom reached</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= 3. ROOM DETAILS SCREEN ================= -->
+      <div id="view-room" class="screen-view">
+        <div style="background:#FFFFFF; border:1px solid var(--border-color); border-radius:18px; padding:20px; margin-bottom:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <span class="room-tag" style="font-size:16px;">Room B-101</span>
+            <span class="status-badge ongoing">● Ongoing Class</span>
+          </div>
+          <div style="font-size:18px; font-weight:800; color:var(--text-main); margin-bottom:4px;">Building B • 1st Floor</div>
+          <div style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">Science & Engineering Hall</div>
+
+          <button class="btn-scan" style="margin-bottom:0; padding:12px 16px;" onclick="switchView('nav', document.querySelectorAll('.preview-btn')[1])">
+            <div style="font-size:14px; font-weight:700;">➔ Navigate to this Room</div>
+            <span style="font-size:12px; color:var(--um-gold-primary);">View Route</span>
+          </button>
+        </div>
+
+        <div class="section-header">
+          <span class="section-title">Class Schedule Today</span>
+        </div>
+
+        <div style="background:#FFFFFF; border:1px solid var(--border-color); border-radius:14px; padding:14px; margin-bottom:16px;">
+          <div style="font-size:13px; font-weight:700; color:var(--text-main);">CS101-A: Introduction to Computing</div>
+          <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">8:30 AM - 10:00 AM • Dr. Alan Turing</div>
+          <div style="margin-top:10px; padding-top:10px; border-top:1px dashed var(--border-color); font-size:13px; font-weight:700; color:var(--text-main);">CS202-B: Object Oriented Programming</div>
+          <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">1:00 PM - 2:30 PM • Prof. Grace Hopper</div>
+        </div>
+
+        <div style="background:var(--um-gold-light); border:1px solid var(--um-gold-primary); border-radius:12px; padding:12px; font-size:12px; color:#854D0E;">
+          💡 <strong>Landmark Hint:</strong> Direct left upon entering Building B's main entrance, beside the administrative bulletin board.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Phone Bottom Tab Bar -->
+    <div class="bottom-nav">
+      <button class="nav-tab-btn active" id="bot-tab-home" onclick="switchView('home', document.querySelectorAll('.preview-btn')[0])">
+        <span class="nav-icon">🏠</span>
+        <span>Home</span>
+      </button>
+      <button class="nav-tab-btn" id="bot-tab-nav" onclick="switchView('nav', document.querySelectorAll('.preview-btn')[1])">
+        <span class="nav-icon">🗺️</span>
+        <span>Route</span>
+      </button>
+      <button class="nav-tab-btn" id="bot-tab-room" onclick="switchView('room', document.querySelectorAll('.preview-btn')[2])">
+        <span class="nav-icon">🏫</span>
+        <span>Rooms</span>
+      </button>
+      <button class="nav-tab-btn" onclick="alert('Simple report issue form is available in V1!')">
+        <span class="nav-icon">⚠️</span>
+        <span>Report</span>
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    // Tab Switching between preview screens
+    function switchView(viewName, btnEl) {
+      document.querySelectorAll('.screen-view').forEach(view => view.classList.remove('active'));
+      document.querySelectorAll('.preview-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.nav-tab-btn').forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById('view-' + viewName).classList.add('active');
+      if (btnEl) btnEl.classList.add('active');
+
+      const botTab = document.getElementById('bot-tab-' + viewName);
+      if (botTab) botTab.classList.add('active');
+    }
+
+    // Interactive Floor Map Switcher
+    function toggleFloor(floorNum) {
+      const svgF1 = document.getElementById('svg-floor-1');
+      const svgF2 = document.getElementById('svg-floor-2');
+      const tabF1 = document.getElementById('tab-floor-1');
+      const tabF2 = document.getElementById('tab-floor-2');
+      const actionBtn = document.getElementById('stair-action-btn');
+
+      if (floorNum === 1) {
+        svgF1.style.display = 'block';
+        svgF2.style.display = 'none';
+        tabF1.classList.add('active');
+        tabF2.classList.remove('active');
+        actionBtn.innerText = 'View Floor 2 ➔';
+      } else {
+        svgF1.style.display = 'none';
+        svgF2.style.display = 'block';
+        tabF1.classList.remove('active');
+        tabF2.classList.add('active');
+        actionBtn.innerText = 'Back to Floor 1 ➔';
+      }
+    }
+  </script>
+</body>
+</html>
+
