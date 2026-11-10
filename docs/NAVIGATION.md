@@ -45,10 +45,14 @@ Unlike outdoor mapping services that rely on continuous satellite tracking, indo
 
 ---
 
-## 3. Multi-Floor Navigation
+## 3. Multi-Floor Navigation & Map Structure
 
-To maintain clarity on mobile screens, Room Finder **never displays multiple floors simultaneously**.
+To maintain clarity on mobile screens, Room Finder **never displays multiple floors simultaneously** and uses an **Evacuation Plan model**:
 
+* **One Unified SVG per Floor**:
+  * Each floor level is represented by **exactly one SVG file** (e.g., `floor-1.svg` for the entire ground floor, `floor-2.svg` for the 2nd floor).
+  * **Never create separate maps for turns, corners, or individual checkpoints.** Turns and checkpoints are simply coordinate dots on that same floor map; the route line simply bends across that single map.
+  * **The map image ONLY changes or flips when the user transitions to another floor** (e.g., taking the stairs from Floor 1 to Floor 2). A 2-story building requires only 2 map images in total.
 * **Floor-by-Floor Segments**: The route is broken into discrete segments per floor.
 * **Transition Step**: When a path crosses floors, an intermediate transition card is shown between segments:
   > *"Take Stairs B to the 3rd floor"* or *"Take Elevator A to the 3rd floor"*.

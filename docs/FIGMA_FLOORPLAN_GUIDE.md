@@ -17,6 +17,12 @@ A step-by-step tutorial for students on how to draw a clean 2D floor plan in Fig
 > - Do **NOT** draw the blue navigation route line.
 > - Do **NOT** draw the green "You Are Here" pin or red destination pins.
 > - *(The app’s code will draw the pins and route line automatically on top of your map!)*
+> - Do **NOT** draw separate images for each turn or hallway checkpoint!
+>
+> **Core Architecture: The Evacuation Plan Model**:
+> - Draw **exactly ONE unified SVG per floor** (like a building fire evacuation plan).
+> - Hallway turns, corners, and room doors are just coordinate points $(X, Y)$ on that **same single floor map**.
+> - The map image **only changes when the student changes floors** (e.g. taking stairs to Floor 2). A 2-story building requires only 2 SVG files in total (`floor-1.svg` and `floor-2.svg`).
 
 ---
 

@@ -47,6 +47,7 @@ We are students building this for our own school. We already have the school's c
   - Route line is static and drawn directly on the floor plan; pins do not move.
   - Step-by-step text directions shown below the map.
   - Multi-floor navigation displays one floor plan at a time with a floor transition step.
+  - **One SVG map per floor level (Evacuation Plan model)**: Exactly one unified SVG file per floor level. Never create separate maps per turn, corner, or hallway checkpoint. Turns and checkpoints are nodes on that same map. The map image only switches when transitioning floors (e.g. taking stairs to Floor 2).
   - Manual start fallback if no QR code is nearby.
   - Outside the building, display only building name, entrance photo, and landmark hint.
 - **Data & Buildings**:
