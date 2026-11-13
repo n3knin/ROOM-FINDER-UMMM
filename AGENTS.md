@@ -1,4 +1,4 @@
-# AGENTS.md
+nzndh# AGENTS.md
 
 > **CRITICAL**: All AI agents and developers working on this project must read this file and everything in `/docs` before doing anything. Do not ask about anything that is already answered here.
 
