@@ -69,23 +69,14 @@ export function generateDirections(pathNodes, edges) {
 
   return directions;
 }
-
-// When the student clicks "Navigate":
-
-// STEP 1: The algorithm finds the shortest path of dots:
-const pathNodes = findShortestPath(startNodeId, targetNodeId, allNodes, allEdges);
-// pathNodes = [Guardhouse, Walkway, Building Entrance, Room 101]
-
-
-// STEP 2: IMMEDIATELY CALL YOUR FUNCTION!
-const textDirections = generateDirections(pathNodes, allEdges);
-// textDirections = [
-//   "1. From Guardhouse, walk 20m to Walkway",
-//   "2. Walk 15m to Building Entrance",
-//   "3. Arrive at Room 101 on your right"
-// ]
-
-
-// STEP 3: The screen shows BOTH at the same time:
-// - The SVG Map draws the blue line through the dots (pathNodes)
-// - The card below the map shows the text directions (textDirections)
+export function getTotalDistance(directions) {
+  return directions.reduce((total, step) => total + step.distance, 0);
+}
+/**
+ * Calculates estimated walking time based on total meters.
+ * (Average student walks about 75 meters per minute).
+ */
+export function getEstimatedTime(totalMeters) {
+  const minutes = Math.ceil(totalMeters / 75);
+  return minutes <= 1 ? '1 min walk' : `${minutes} mins walk`;
+}
