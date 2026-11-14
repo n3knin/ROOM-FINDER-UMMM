@@ -69,3 +69,4 @@ export function generateDirections(pathNodes, edges) {
 
   return directions;
 }
+
