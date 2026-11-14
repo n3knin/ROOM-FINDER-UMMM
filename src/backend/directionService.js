@@ -80,3 +80,13 @@ export function getEstimatedTime(totalMeters) {
   const minutes = Math.ceil(totalMeters / 75);
   return minutes <= 1 ? '1 min walk' : `${minutes} mins walk`;
 }
+export function getDirectionsByFloor(directions) {
+  if (!directions || directions.length === 0) return {};
+  
+  return directions.reduce((acc, step) => {
+    const floor = step.floor || 1;
+    if (!acc[floor]) acc[floor] = [];
+    acc[floor].push(step);
+    return acc;
+  }, {});
+}
