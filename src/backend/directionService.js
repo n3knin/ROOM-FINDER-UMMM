@@ -56,6 +56,7 @@ export function generateDirections(pathNodes, edges) {
       instructionText = `Walk ${distance}m towards ${nextNode.label}.`;
     }
 
+   
     // Add this step to our list
     directions.push({
       step: directions.length + 1,
