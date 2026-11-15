@@ -38,6 +38,9 @@ export function buildGraph(edges, options = { accessibleOnly: false }) {
 
 /**
  * Gets all direct neighbors for a specific node.
+ * @param {Object} graph - The graph produced by buildGraph
+ * @param {string} nodeId - The ID of the node to check
+ * @returns {Array} List of neighbor objects [{ node, distance }, ...]
  */
 export function getNeighbors(graph, nodeId) {
   if (!graph || !nodeId) return [];
