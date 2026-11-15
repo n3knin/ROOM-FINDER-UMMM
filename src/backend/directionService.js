@@ -73,10 +73,7 @@ export function generateDirections(pathNodes, edges) {
 export function getTotalDistance(directions) {
   return directions.reduce((total, step) => total + step.distance, 0);
 }
-/**
- * Calculates estimated walking time based on total meters.
- * (Average student walks about 75 meters per minute).
- */
+
 export function getEstimatedTime(totalMeters) {
   const minutes = Math.ceil(totalMeters / 75);
   return minutes <= 1 ? '1 min walk' : `${minutes} mins walk`;
