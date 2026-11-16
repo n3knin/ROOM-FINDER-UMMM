@@ -1,17 +1,17 @@
 /**
- * Builds an Adjacency List (Fast Address Book) from the edges list.
- * @param {Array} edges - The list of connections from edges.json
- * @param {Object} options - { accessibleOnly: boolean }
- * @returns {Object} A graph map where each node points to its neighbors.
+ * Builds an Adjacency List (Fast Lookup Map) from edges.json.
+ * @param {Array} edges - The list of walkways from edges.json
+ * @returns {Object} A map where each node points to all its direct neighbors.
  */
-export function buildGraph(edges, options = { accessibleOnly: false }) {
+export function buildGraph(edges) {
   const graph = {};
 
+  // Safety check: if no edges provided, return an empty graph
   if (!edges || !Array.isArray(edges)) {
     return graph;
   }
 
-  // Helper to safely add a neighbor connection
+  // Helper function to safely add a neighbor
   function addConnection(from, to, distance) {
     if (!graph[from]) {
       graph[from] = [];
@@ -19,17 +19,12 @@ export function buildGraph(edges, options = { accessibleOnly: false }) {
     graph[from].push({ node: to, distance: distance });
   }
 
-  // Loop through every edge in edges.json
+  // Loop through every walkway in edges.json
   for (const edge of edges) {
-    // 1. Accessibility Filter: If wheelchair mode is ON and this edge uses stairs, SKIP IT!
-    if (options.accessibleOnly && edge.accessible === false) {
-      continue; // Ignore this staircase!
-    }
-
-    // 2. Connect Point A -> Point B
+    // 1. You can walk from A to B
     addConnection(edge.fromNodeId, edge.toNodeId, edge.distance);
 
-    // 3. Connect Point B -> Point A (Walkways work in both directions!)
+    // 2. You can walk from B to A (hallways work both ways!)
     addConnection(edge.toNodeId, edge.fromNodeId, edge.distance);
   }
 
@@ -37,10 +32,7 @@ export function buildGraph(edges, options = { accessibleOnly: false }) {
 }
 
 /**
- * Gets all direct neighbors for a specific node.
- * @param {Object} graph - The graph produced by buildGraph
- * @param {string} nodeId - The ID of the node to check
- * @returns {Array} List of neighbor objects [{ node, distance }, ...]
+ * Gets all direct neighbors you can step to from a specific node.
  */
 export function getNeighbors(graph, nodeId) {
   if (!graph || !nodeId) return [];
