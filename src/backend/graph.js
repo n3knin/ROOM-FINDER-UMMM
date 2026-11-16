@@ -1,8 +1,4 @@
-/**
- * Builds an Adjacency List (Fast Lookup Map) from edges.json.
- * @param {Array} edges - The list of walkways from edges.json
- * @returns {Object} A map where each node points to all its direct neighbors.
- */
+
 export function buildGraph(edges) {
   const graph = {};
 
