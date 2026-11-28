@@ -1,4 +1,4 @@
-s sns# CLAUDE.md
+# CLAUDE.md
 
 > **CRITICAL**: Before performing any action or answering questions about this project, read [AGENTS.md](AGENTS.md) and all documents in the [docs/](docs/) folder.
 
